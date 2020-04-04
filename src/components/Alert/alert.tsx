@@ -4,11 +4,11 @@ import classNames from 'classnames'
 export type AlertType = 'success' | 'default' | 'danger' | 'warning'
 
 interface AlertProps {
-  className?: string,
-  title?: string,
-  description?: string,
-  type?: AlertType,
-  onClose?: React.MouseEventHandler<HTMLButtonElement>,
+  className?: string
+  title?: string
+  description?: string
+  type?: AlertType
+  onClose?: React.MouseEventHandler<HTMLButtonElement>
   closable?: Boolean
 }
 
