@@ -3,6 +3,7 @@ import Button, {ButtonSize, ButtonType} from './components/Button/button'
 import Alert from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
+import SubMenu from './components/Menu/subMenu'
 
 function App() {
   return (
@@ -28,16 +29,28 @@ function App() {
       </div>
 
       <div style={{marginTop: 20, width: 400}}>
-        <Menu defaultIndex={0} onSelect={(index)=>{alert(index)}}>
+        <Menu defaultIndex='2' onSelect={(index)=>{alert(index)}}>
           <MenuItem>link 1</MenuItem>
           <MenuItem disabled>link 2</MenuItem>
           <MenuItem>link 3</MenuItem>
+          <SubMenu title='下拉菜单'>
+            <MenuItem>菜单1</MenuItem>
+            <MenuItem>菜单2</MenuItem>
+          </SubMenu>
         </Menu>
-        <hr/>
-        <Menu mode='vertical' defaultIndex={0} onSelect={(index)=>{alert(index)}}>
+        <div style={{marginTop: 100}}></div>
+        <Menu mode='vertical' onSelect={(index)=>{alert(index)}} defaultOpenSubMenus={['3']}>
           <MenuItem>link 1</MenuItem>
           <MenuItem  disabled>link 2</MenuItem>
           <MenuItem>link 3</MenuItem>
+          <SubMenu title='下拉菜单'>
+            <MenuItem>菜单1</MenuItem>
+            <MenuItem>菜单2</MenuItem>
+          </SubMenu>
+          <SubMenu title='下拉菜单2'>
+            <MenuItem>菜单11</MenuItem>
+            <MenuItem>菜单22</MenuItem>
+          </SubMenu>
         </Menu>
       </div>
     </div>
