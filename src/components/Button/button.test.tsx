@@ -14,8 +14,8 @@ const defaultProps = {
 }
 
 const testProps: ButtonProps = {
-  btnType: ButtonType.Primary,
-  size: ButtonSize.Large,
+  btnType: 'primary',
+  size: 'lg',
   className: 'klass'
 }
 
@@ -45,7 +45,7 @@ describe('test Button component', () => {
   })
 
   it('should render a link when btnType equals link and href is provided', () => {
-    const wrapper = render(<Button {...testProps} btnType={ButtonType.Link} href='https://www.baidu.com/'>nice</Button>)
+    const wrapper = render(<Button {...testProps} btnType='link' href='https://www.baidu.com/'>nice</Button>)
     const element = wrapper.getByText('nice')
     expect(element).toBeInTheDocument()
     expect(element.tagName).toEqual('A')

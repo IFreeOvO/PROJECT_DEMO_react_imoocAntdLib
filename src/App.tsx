@@ -1,20 +1,23 @@
-import React from 'react';
-import Button, {ButtonSize, ButtonType} from './components/Button/button'
+import React, {useState} from 'react';
+
+import Button from './components/Button/button'
 import Alert from './components/Alert/alert'
 import Menu from './components/Menu/menu'
 import MenuItem from './components/Menu/menuItem'
 import SubMenu from './components/Menu/subMenu'
+import Icon from './components/Icon/icon'
+import Transition from './components/Transition/transition'
 
 function App() {
+  const [show, setShow] = useState(false)
   return (
     <div className="App" style={{padding: 40}}>
       <Button className='custom' >默认按钮</Button>
       <Button disabled>禁用</Button>
-      <Button size={ButtonSize.Large} btnType={ButtonType.Primary}>大按钮</Button>
-      <Button size={ButtonSize.Small} btnType={ButtonType.Primary}>小按钮</Button>
-      <Button btnType={ButtonType.Link} target='_blank' href='https://www.baidu.com/'>按钮链接</Button>
-      <Button btnType={ButtonType.Link} href='https://www.baidu.com/' disabled>禁用按钮链接</Button>
-
+      <Button size='lg' btnType='primary'>大按钮</Button>
+      <Button size='sm' >小按钮</Button>
+      <Button btnType='link' target='_blank' href='https://www.baidu.com/'>按钮链接</Button>
+      <Button btnType='link' href='https://www.baidu.com/' disabled>禁用按钮链接</Button>
 
       <div style={{marginTop: 20, width: 400}}>
         <Alert closable onClose={(e) => alert(e)}></Alert>
@@ -52,6 +55,21 @@ function App() {
             <MenuItem>菜单22</MenuItem>
           </SubMenu>
         </Menu>
+      </div>
+      <div style={{marginTop: 20, width: 400, height: 600}}>
+        <Icon icon="coffee" theme='success' size='10x'></Icon>
+
+        <Button size='lg' onClick={() => {setShow(!show)}}>切换动画</Button>
+        <Transition in={show} timeout={300} animation='zoom-in-left'>
+          <div>
+            <p>家居</p>
+            <p>甲氨基</p>
+            <p>商城</p>
+          </div>
+        </Transition>
+        <Transition wrapper in={show} timeout={3000} animation='zoom-in-top'>
+            <Button size='lg'>答案呢</Button>
+        </Transition>  
       </div>
     </div>
   );
