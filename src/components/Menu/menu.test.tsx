@@ -88,7 +88,7 @@ describe('test Menu and MenuItem component', () => {
   })
 
   it('should show dropdown items when hover on submenu', async () => {
-    expect(wrapper.queryByText('菜单1')).not.toBeVisible() // 如果不插入css，会一直显示
+    expect(wrapper.queryByText('菜单1')).toBeNull() // 如果不插入css，会一直显示。被transition组件包装后，子组件一开始是不存在的
 
     // 鼠标移入显示元素
     const dropdownElement = wrapper.getByText('下拉菜单')
