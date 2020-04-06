@@ -15,7 +15,6 @@ type TransitionProps = CSSTransitionProps & {
 
 const Transition: React.FC<TransitionProps> = props => {
   const { classNames, animation, children, wrapper, ...restProps } = props
-  console.log("wrapper", wrapper)
   return (
     <CSSTransition
       {...restProps}
