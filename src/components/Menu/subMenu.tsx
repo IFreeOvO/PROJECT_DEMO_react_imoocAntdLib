@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, FC, FunctionComponentElement } from 'react'
 import classNames from 'classnames'
 import Transition from '../Transition/transition'
 
@@ -8,11 +8,12 @@ import Icon from '../../components/Icon/icon'
 
 export interface SubMenuProps {
   index?: string
+  /**下拉菜单选项的文字 */
   title?: string
   className?: string
 }
 
-const SubMenu: React.FC<SubMenuProps> = props => {
+export const SubMenu: FC<SubMenuProps> = props => {
   const { index, title, className, children } = props
   const context = useContext(MenuContext)
   const openedSubMenus = context.defaultOpenSubMenus as Array<string>
@@ -33,7 +34,7 @@ const SubMenu: React.FC<SubMenuProps> = props => {
       'menu-opened': menuOpen
     })
     const childrenComponent = React.Children.map(children, (child, i) => {
-      const childElement = child as React.FunctionComponentElement<
+      const childElement = child as FunctionComponentElement<
         MenuItemProps
       >
       const { displayName } = childElement.type
