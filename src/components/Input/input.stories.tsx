@@ -31,7 +31,7 @@ const iconInput = () => (
 )
 
 const sizeInput = () => (
-  <>
+  <div>
     <Input
       defaultValue="large size"
       size="lg"
@@ -40,11 +40,11 @@ const sizeInput = () => (
       placeholder="small size"
       size="sm"
     />
-  </>
+  </div>
 )
 
 const pandInput = () => (
-  <>
+  <div>
     <Input
       defaultValue="prepend text"
       prepend="https://"
@@ -54,7 +54,7 @@ const pandInput = () => (
       append=".com"
     />
     
-  </>
+  </div>
 )
 
 
