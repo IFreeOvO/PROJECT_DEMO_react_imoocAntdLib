@@ -22,7 +22,7 @@ const defaultMenu = () => (
 )
 
 const menuWithVertical = () => (
-  <>
+  <div>
     <Menu
       mode="vertical"
       onSelect={action('selected')}
@@ -39,11 +39,11 @@ const menuWithVertical = () => (
         <MenuItem>菜单22</MenuItem>
       </SubMenu>
     </Menu>
-  </>
+  </div>
 )
 
 const menuWithDefaultOpen = () => (
-  <>
+  <div>
     <Menu
       mode="vertical"
       onSelect={action('selected')}
@@ -61,7 +61,7 @@ const menuWithDefaultOpen = () => (
         <MenuItem>菜单22</MenuItem>
       </SubMenu>
     </Menu>
-  </>
+  </div>
 )
 
 storiesOf('Menu 组件', module)
