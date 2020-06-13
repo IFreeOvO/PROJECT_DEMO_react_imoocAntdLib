@@ -4,9 +4,11 @@ import Button from '../Button/button'
 
 export interface UploadProps {
   action: string
+  beforeUpload?: (file: File) => Boolean | Promise<File>
   onProgress?: (percentage: number, file: File) => void
   onSuccess?: (data: any, file: File) => void
   onError?: (err: any, file: File) => void
+  onChange?: (file: File) => void
   name?: string
 }
 
@@ -19,7 +21,7 @@ export interface UploadProps {
  * ~~~
  */
 export const Upload: FC<UploadProps> = (props) => {
-  const { action, onProgress, onSuccess, onError, name } = props
+  const { action, beforeUpload, onProgress, onSuccess, onError, onChange, name } = props
   const fileInput = useRef<HTMLInputElement>(null)
 
   const handleClick = () => {
@@ -41,37 +43,59 @@ export const Upload: FC<UploadProps> = (props) => {
 
   const uploadFile = (files: FileList) => {
     let postFile = Array.from(files)
-    console.log("uploadFile -> postFile", postFile)
+    console.log('uploadFile -> postFile', postFile)
 
     postFile.forEach((file) => {
-      const formData = new FormData()
-      formData.append(file.name, file)
-      axios
-        .post(action, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          onUploadProgress: (e) => {
-            console.log('onProgress -> e', e)
-            let percentage = Math.round((e.loaded * 100) / e.total) || 0
-            if (onProgress) {
-              onProgress(percentage, file)
-            }
-          },
-        })
-        .then((res) => {
-          console.log('onSuccess -> res', res)
-          if (onSuccess) {
-            onSuccess(res, file)
-          }
-        })
-        .catch((err) => {
-          console.log('uploadFile -> err', err)
-          if (onError) {
-            onError(err, file)
-          }
-        })
+      if(!beforeUpload) {
+        post(file)
+      } else {
+        const result = beforeUpload(file)
+        console.log("beforeUpload -> result", result)
+        if(result && result instanceof Promise) {
+          result.then(processedFile => {
+            post(processedFile)
+          })
+        } else if(result !== false) {
+          post(file)
+        }
+      }
     })
+  }
+
+  const post = (file: File) => {
+    const formData = new FormData()
+    formData.append(file.name, file)
+    axios
+      .post(action, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (e) => {
+          console.log('onProgress -> e', e)
+          let percentage = Math.round((e.loaded * 100) / e.total) || 0
+          if (onProgress) {
+            onProgress(percentage, file)
+          }
+        },
+      })
+      .then((res) => {
+        console.log('onSuccess -> res', res)
+        if (onSuccess) {
+          onSuccess(res, file)
+        }
+        if(onChange) {
+          onChange(file)
+        }
+      })
+      .catch((err) => {
+        console.log('uploadFile -> err', err)
+        if (onError) {
+          onError(err, file)
+        }
+        if(onChange) {
+          onChange(file)
+        }
+      })
   }
 
   return (
