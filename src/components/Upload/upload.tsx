@@ -1,7 +1,7 @@
 import React, { FC, ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
 import UploadList from './uploadList'
-import Dragger from './tragger'
+import Dragger from './dragger'
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 
@@ -218,4 +218,4 @@ Upload.defaultProps = {
   name: 'file',
 }
 
-export default Upload
+export default Upload;

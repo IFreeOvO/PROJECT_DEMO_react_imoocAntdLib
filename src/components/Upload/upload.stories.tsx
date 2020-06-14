@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import Upload from './upload'
 import { UploadFile } from './upload'
-import Dragger from './tragger'
+import Dragger from './dragger'
 import Icon from '../Icon/icon'
 
 const defaultFileList: UploadFile[] = [
