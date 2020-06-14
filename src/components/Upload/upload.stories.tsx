@@ -29,6 +29,11 @@ const simpleUpload = () => {
       onError={action('error')}
       onChange={action('change')}
       defaultFileList={defaultFileList}
+      name="filename"
+      data={{'demo':'test'}}
+      headers={{'X-Powered-By': 'demo'}}
+      accept='.png'
+      multiple
     ></Upload>
   )
 }
