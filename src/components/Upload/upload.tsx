@@ -1,7 +1,7 @@
 import React, { FC, ChangeEvent, useRef, useState } from 'react'
 import axios from 'axios'
-import Button from '../Button/button'
 import UploadList from './uploadList'
+import Dragger from './tragger'
 
 export type UploadFileStatus = 'ready' | 'uploading' | 'success' | 'error'
 
@@ -24,12 +24,13 @@ export interface UploadProps {
   onError?: (err: any, file: File) => void
   onChange?: (file: File) => void
   onRemove?: (file: UploadFile) => void
-  headers?: {[key:string]: any}
+  headers?: { [key: string]: any }
   name?: string
-  data?: {[key:string]: any}
+  data?: { [key: string]: any }
   withCredentials?: boolean
   accept?: string
   multiple?: boolean
+  drag?: boolean
 }
 
 /**
@@ -55,7 +56,9 @@ export const Upload: FC<UploadProps> = (props) => {
     data,
     withCredentials,
     accept,
-    multiple
+    multiple,
+    children,
+    drag,
   } = props
   const fileInput = useRef<HTMLInputElement>(null)
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || [])
@@ -132,8 +135,8 @@ export const Upload: FC<UploadProps> = (props) => {
 
     const formData = new FormData()
     formData.append(file.name, file)
-    if(data) {
-      Object.keys(data).forEach(key => {
+    if (data) {
+      Object.keys(data).forEach((key) => {
         formData.append(key, data[key])
       })
     }
@@ -141,7 +144,7 @@ export const Upload: FC<UploadProps> = (props) => {
       .post(action, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          ...headers
+          ...headers,
         },
         withCredentials,
         onUploadProgress: (e) => {
@@ -180,29 +183,33 @@ export const Upload: FC<UploadProps> = (props) => {
 
   const handleRemove = (file: UploadFile) => {
     setFileList((preList) => {
-      return preList.filter(item => item.uid !== file.uid)
+      return preList.filter((item) => item.uid !== file.uid)
     })
-    if(onRemove) {
+    if (onRemove) {
       onRemove(file)
     }
   }
 
   return (
     <div className="upload-component">
-      <Button btnType="primary" onClick={handleClick}>
-        上传文件
-      </Button>
-      <input
-        className="file-input"
-        style={{ display: 'none' }}
-        type="file"
-        name={name}
-        ref={fileInput}
-        onChange={handleFileChange}
-        accept={accept}
-        multiple={multiple}
-      />
-      <UploadList fileList={fileList} onRemove={handleRemove}></UploadList>
+      <div
+        className="upload-input"
+        style={{ display: 'inline-block' }}
+        onClick={handleClick}
+      >
+        {drag ? <Dragger onFile={(files) => {uploadFile(files)}}>{children}</Dragger> : children}
+        <input
+          className="file-input"
+          style={{ display: 'none' }}
+          type="file"
+          name={name}
+          ref={fileInput}
+          onChange={handleFileChange}
+          accept={accept}
+          multiple={multiple}
+        />
+        <UploadList fileList={fileList} onRemove={handleRemove}></UploadList>
+      </div>
     </div>
   )
 }
