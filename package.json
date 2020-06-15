@@ -28,11 +28,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "clean": "rimraf ./build",
+    "build": "npm run clean && npm run build-ts && npm run build-css",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "build-ts": "tsc -p tsconfig.build.json",
+    "build-css": "node-sass ./src/styles/index.scss ./build/index.css"
   },
   "husky": {
     "hooks": {
@@ -63,6 +66,7 @@
     "@types/storybook__addon-info": "^5.2.1",
     "husky": "^4.2.3",
     "react-docgen-typescript-loader": "^3.7.2",
+    "rimraf": "^3.0.2",
     "validate-commit-msg": "^2.14.0"
   }
 }
