@@ -1,6 +1,6 @@
 {
   "name": "yq-utils",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": false,
   "author": "yiq",
   "description": "react components lib",
@@ -8,7 +8,9 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
-  "keywords": ["UI"],
+  "keywords": [
+    "UI"
+  ],
   "homepage": "https://github.com/ifreeOvO/ifreeOvO",
   "repository": {
     "type": "git",
@@ -20,17 +22,20 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf ./dist",
+    "lint": "eslint --ext js,ts,tsx src --max-warnings 5",
     "build": "npm run clean && npm run build-ts && npm run build-css",
     "test": "react-scripts test",
+    "test:nowatch": "cross-env CI=true npm run test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
-    "prepublish": "npm run build"
+    "prepublish": "npm run test:nowatch && npm run lint && npm run build"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "npm run test:nowatch && npm run lint",
       "commit-msg": "validate-commit-msg"
     }
   },
@@ -66,8 +71,8 @@
     "@storybook/addon-info": "^5.3.18",
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
-    "@storybook/react": "^5.3.18",
     "@storybook/preset-create-react-app": "^2.1.1",
+    "@storybook/react": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -78,10 +83,11 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-transition-group": "^4.2.4",
     "@types/storybook__addon-info": "^5.2.1",
+    "cross-env": "^7.0.2",
     "husky": "^4.2.3",
     "node-sass": "^4.13.1",
-    "react-docgen-typescript-loader": "^3.7.2",
     "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "rimraf": "^3.0.2",
