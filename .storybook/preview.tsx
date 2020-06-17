@@ -23,6 +23,7 @@ addDecorator(withInfo)
 
 const loaderFn = () => {
   return [
+    require('../src/welcome.stories.tsx'),
     require('../src/components/Button/button.stories.tsx'),
     require('../src/components/Menu/menu.stories.tsx'),
     require('../src/components/Input/input.stories.tsx'),

@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 import Upload from './upload'
 import { UploadFile } from './upload'
-import Dragger from './dragger'
 import Icon from '../Icon/icon'
+import Button from '../Button/button'
 
 const defaultFileList: UploadFile[] = [
   {
@@ -42,7 +42,9 @@ const simpleUpload = () => {
       headers={{ 'X-Powered-By': 'demo' }}
       accept=".png"
       multiple
-    ></Upload>
+    >
+      <Button size="lg" btnType="primary"><Icon icon="upload" /> 点击上传 </Button>
+    </Upload>
   )
 }
 
