@@ -31,7 +31,7 @@
     "build-storybook": "build-storybook -s public",
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
-    "prepublish": "npm run test:nowatch && npm run lint && npm run build"
+    "prepublishOnly": "npm run test:nowatch && npm run lint && npm run build"
   },
   "husky": {
     "hooks": {
