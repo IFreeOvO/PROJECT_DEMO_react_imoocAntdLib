@@ -10,7 +10,9 @@ script:
   - echo 'start exec script...'
   - npm run build-storybook
 deploy:
-  github_token: $coding_token
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
   local_dir: storybook-static
   on:
     branch: master
