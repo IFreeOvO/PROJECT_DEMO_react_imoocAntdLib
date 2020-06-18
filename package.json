@@ -1,6 +1,6 @@
 {
   "name": "yq-utils",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "private": false,
   "author": "yiq",
   "description": "react components lib",
@@ -11,10 +11,10 @@
   "keywords": [
     "UI"
   ],
-  "homepage": "https://github.com/ifreeOvO/ifreeOvO",
+  "homepage": "https://ifreeovo.github.io/PROJECT_DEMO_react_imoocAntdLib/?path=/story/welcome-page--%E6%AC%A2%E8%BF%8E%E4%BD%BF%E7%94%A8",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ifreeOvO/ifreeOvO"
+    "url": "https://github.com/IFreeOvO/PROJECT_DEMO_react_imoocAntdLib"
   },
   "files": [
     "dist"
